@@ -29,11 +29,5 @@
     <script>let _url = '<?= SERVER_URL ?>';</script>
   
 </head>
-<body class="cloudy-knoxville-gradient">
-
-    <!-- Bootstrap -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- mdbootstrap -->
-    <script type="text/javascript" src="vendor/mdbootstrap/js/mdb.min.js"></script>
-    <script type="text/javascript" src="vendor/mdbootstrap/js/popper.min.js"></script>
+<body>
+    

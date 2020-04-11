@@ -3,3 +3,4 @@
 $ajaxcontroller = new AjaxController();
 
 $ajaxcontroller->addProduct();
+// echo json_encode($_POST);

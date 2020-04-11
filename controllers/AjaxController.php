@@ -2,6 +2,11 @@
 
 class AjaxController
 {
+    public function __construct()
+    {
+        R::setup('sqlite:database.sqlite');
+    }
+
     public function getProducts()
     {
         $products = R::getAll('SELECT * FROM products');
@@ -12,14 +17,12 @@ class AjaxController
     {
         if(isset($_POST) && !empty($_POST))
         {
-            $post = $_POST;
-            
-            $products = R::dispense('products');
-            $products->name         = $post['name'];
-            $products->description  = $post['description'];
-            $products->price        = $post['price'];
-            
-            $id = R::store($products);
+            $product = R::dispense('products');
+            $product->name         = $_POST['name'];
+            $product->description  = $_POST['description'];
+            $product->price        = $_POST['price'];
+
+            $id = R::store($product);
 
             $this->parseJSON($id);
         }

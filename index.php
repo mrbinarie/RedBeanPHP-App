@@ -2,7 +2,7 @@
 
 define("HAS_ACCESS", true);
 
-require 'rb.php';
+// require 'rb.php';
 
 include_once 'env.php';
 include_once 'controllers/PagesController.php';

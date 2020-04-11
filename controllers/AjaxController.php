@@ -13,6 +13,13 @@ class AjaxController
         $this->parseJSON($products);
     }
 
+    public function getProduct()
+    {
+        $product_id = intVal($_GET['product_id']);
+        $product = R::load('products', $product_id);
+        $this->parseJSON($product);
+    }
+    
     public function addProduct()
     {
         if(isset($_POST) && !empty($_POST))

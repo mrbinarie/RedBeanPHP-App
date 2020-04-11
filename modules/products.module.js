@@ -22,23 +22,30 @@ class Products
             dataType: 'JSON',
             success: function (data) {
                 console.log(data)
-                _this.fillTable(data);
+        
+                $.each(data, function(key, value) {
+                    _this.appendProduct(value);
+                });
             }
         });
     }
 
-    fillTable(data)
+    appendProduct(value)
     {
-        let table = $('#table_products > tbody');
+        let table = $('#table_products');
 
-        $.each(data, function(key, value) {
-            table.append(`
-                <tr>
-                    <td>${value['name']}</td>
-                    <td>${value['price']} ₾</td>
-                    <td>${value['description']}</td>
-                </tr>`);
-        });
+        table.append(`
+            <div class="col-md-3" style="padding: 5px">
+                <div class="card" style="padding: 5px">
+                    <img src="https://miro.medium.com/max/2834/0*f81bU2qWpP51WWWC.jpg" class="w-100" />
+                    
+                    <div class="row">
+                        <div class="col-md"><a href="${_url + 'product?prod=' + value['id']}">${value['name']}</a></div>
+                        <div class="col-md text-right text-success">${value['price']} ₾</div>
+                        <div class="col-md-12">${value['description']}</div>
+                    </div>
+                </div>
+            </div>`);
     }
 
     modalAddProduct()
@@ -64,6 +71,7 @@ class Products
 
         modalBody.html(form);
         modal.modal('show');
+
         this.submitAddProduct();
     }
     
@@ -71,6 +79,7 @@ class Products
     {
         let _this = this;
         let form = $('#form_addProduct');
+        let modal = $('#product_modal');
         let data = {};
         
         form.submit(function(e) {
@@ -82,6 +91,9 @@ class Products
             })
 
             _this.addProduct(data);
+
+            modal.modal('hide');
+            _this.appendProduct(data);
         });
     }
 

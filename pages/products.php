@@ -1,25 +1,17 @@
-<div class="container py-5 text-center">
-    product list
+<?php if(!defined("HAS_ACCESS")) die("Not Access!"); ?>
+
+<div class="container py-2 text-center">
+    Products
 </div>
 
 <div class="container" >
-    <div class="w-100 text-right">
+    <div class="w-100 text-right py-2">
         <button class="btn btn-success" id="add_product">Add Product</button>
 
     </div>
  
-    <table id="table_products" class="table table-stripped table-sm">
-        <thead>
-            <tr>
-                <th width="30%">Product Name</th>
-                <th width="10%">Price</th>
-                <th width="60%">Description</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <div class="row" id="table_products"></div>
 </div>
-
 
 
 <script src="<?= SERVER_URL ?>modules/products.module.js"></script>

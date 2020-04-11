@@ -9,14 +9,14 @@ class AjaxController
 
     public function getProducts()
     {
-        $products = R::getAll('SELECT * FROM products');
+        $products = R::getAll('SELECT * FROM product');
         $this->parseJSON($products);
     }
 
     public function getProduct()
     {
         $product_id = intVal($_GET['product_id']);
-        $product = R::load('products', $product_id);
+        $product = R::load('product', $product_id);
         $this->parseJSON($product);
     }
     
@@ -24,7 +24,7 @@ class AjaxController
     {
         if(isset($_POST) && !empty($_POST))
         {
-            $product = R::dispense('products');
+            $product = R::dispense('product');
             $product->name         = $_POST['name'];
             $product->description  = $_POST['description'];
             $product->price        = $_POST['price'];
@@ -33,6 +33,25 @@ class AjaxController
 
             $this->parseJSON($id);
         }
+    }
+    
+    public function addToCart()
+    {
+        if(isset($_POST) && !empty($_POST))
+        {
+            $cart = R::dispense('cart');
+            $cart->product_id = $_POST['product_id'];
+            R::store($cart);
+        }
+        $count = R::count('cart');
+        $this->parseJSON($count);
+    }
+    
+    public function getCartProducts()
+    {
+        $cart = R::getAll("SELECT p.id, p.name, p.price FROM cart as c LEFT JOIN product as p ON c.product_id = p.id");
+        
+        $this->parseJSON($cart);
     }
 
     public function parseJSON($response)

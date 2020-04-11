@@ -1,0 +1,11 @@
+RewriteEngine on
+
+# ajax
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ajax/(.+)$ ajax/index.php?p=$1 [QSA,L]
+
+# index 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)$ index.php?p=$1 [QSA,L]
